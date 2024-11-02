@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mental Health Checkup</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f4f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      width: 90%;
+      max-width: 400px;
+    }
+    h1 {
+      color: #333;
+      text-align: center;
+    }
+    .question {
+      margin: 15px 0;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #555;
+    }
+    select, button {
+      width: 100%;
+      padding: 8px;
+      margin: 5px 0 15px 0;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+    }
+    .result {
+      font-weight: bold;
+      text-align: center;
+      color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Mental Health Checkup</h1>
+    <form id="checkupForm">
+      <div class="question">
+        <label>How often do you feel anxious?</label>
+        <select name="anxiety" required>
+          <option value="">Select</option>
+          <option value="0">Rarely</option>
+          <option value="1">Sometimes</option>
+          <option value="2">Often</option>
+          <option value="3">Always</option>
+        </select>
+      </div>
+      <div class="question">
+        <label>How often do you feel down or depressed?</label>
+        <select name="depression" required>
+          <option value="">Select</option>
+          <option value="0">Rarely</option>
+          <option value="1">Sometimes</option>
+          <option value="2">Often</option>
+          <option value="3">Always</option>
+        </select>
+      </div>
+      <div class="question">
+        <label>Do you have trouble sleeping?</label>
+        <select name="sleep" required>
+          <option value="">Select</option>
+          <option value="0">No</option>
+          <option value="1">Sometimes</option>
+          <option value="2">Often</option>
+          <option value="3">Always</option>
+        </select>
+      </div>
+      <button type="button" onclick="calculateScore()">Check My Mental Health</button>
+    </form>
+    <div id="result" class="result"></div>
+  </div>
+
+  <script>
+    function calculateScore() {
+      const form = document.getElementById('checkupForm');
+      const resultDiv = document.getElementById('result');
+
+      let score = 0;
+      for (const element of form.elements) {
+        if (element.tagName === 'SELECT') {
+          score += parseInt(element.value);
+        }
+      }
+
+      let message = '';
+      if (score <= 2) {
+        message = "You're doing well, but remember to take breaks!";
+      } else if (score <= 5) {
+        message = "You might be experiencing some stress. Consider reaching out to friends or doing something relaxing.";
+      } else {
+        message = "It might help to talk to a mental health professional.";
+      }
+
+      resultDiv.textContent = message;
+    }
+  </script>
+</body>
+</html>
